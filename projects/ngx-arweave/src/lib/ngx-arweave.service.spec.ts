@@ -68,4 +68,6 @@ describe('ArweaveService', () => {
     expect(service.hasOwnProperty('GetCurrentBlock')).toBeDefined();
   });
 
+  
+
 });
