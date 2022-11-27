@@ -3,5 +3,39 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "ngx-arweave": {
+      "projectType": "library",
+      "root": "projects/ngx-arweave",
+      "sourceRoot": "projects/ngx-arweave/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-arweave/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-arweave/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-arweave/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-arweave/src/test.ts",
+            "tsConfig": "projects/ngx-arweave/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-arweave/karma.conf.js"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "3fe3f4b0-928f-40f1-9d4b-a16a7005af2b"
   }
 }
