@@ -20,13 +20,13 @@ describe('ArweaveService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should contain Arweave Class Object', () => {
-    expect(service._arClient).toBeTruthy();
-  });
-
   it('should contain GetAddressBalance function', () => {
       expect(service.hasOwnProperty('GetAddressBalance')).toBe(true);
   });
+
+  it('should contain GetWalletLastTransaction function', () => {
+    expect(service.hasOwnProperty('GetWalletLastTransaction')).toBeDefined();
+  })
 
   it('should contain CreateTransaction function', () => {
     expect(service.hasOwnProperty('CreateTransaction')).toBeDefined();
@@ -66,6 +66,10 @@ describe('ArweaveService', () => {
 
   it('should contain GetCurrentBlock function', () => {
     expect(service.hasOwnProperty('GetCurrentBlock')).toBeDefined();
+  });
+
+  it('should contain GetInfo function', () => {
+    expect(service.hasOwnProperty('GetInfo')).toBeDefined();
   });
 
   
