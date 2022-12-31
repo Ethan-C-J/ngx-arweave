@@ -1,7 +1,8 @@
 import { Inject, Injectable, Input, Optional } from '@angular/core';
 import { InfoSchema } from './schemas/InfoSchema';
-import Arweave from 'arweave';
-import { Observable, from } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { NgxArweaveBlockService } from './block/ngx-arweave-block.service';
 
 export interface ApiConfig {
   host?: string;
@@ -14,42 +15,29 @@ export interface ApiConfig {
 }
 
 @Injectable()
-export class ArweaveService extends Object {
+export class ArweaveService {
 
-  @Input() ar!: Arweave;
-  private _arClient!: Arweave;
-
+  private config: ApiConfig;
+  
   constructor(
-    @Inject('arweaveConfig') @Optional() public arConfig: ApiConfig
-  ) { 
-    super();
-    this._arClient = new Arweave(arConfig);
+    private http: HttpClient,
+    private blockService: NgxArweaveBlockService,
+    @Inject('arweaveConfig') @Optional() public arConfig: ApiConfig,
+  ) {
+    this.config = arConfig;
   }
 
   
   GetInfo(): Observable<InfoSchema> {
-
-    let obs = new Observable<InfoSchema>((observer) => {
-      this._arClient.network.getInfo().then( info => {
-        let ret: InfoSchema = {
-          status: 200,
-          network: info.network,
-          version: info.version,
-          release: info.release,
-          height: info.height,
-          currentBlock: info.current,
-          blockCount: info.blocks,
-          peerCount: info.peers,
-          queueLength: info.queue_length,
-          nodeStateLatency: info.node_state_latency
-        }
-
-        observer.next(ret);
-      })
-    });
-
-    return obs;
-
+    let port = typeof this.arConfig.port == "number" 
+              ? this.arConfig.port 
+              : this.arConfig.port == "https" 
+                ? 443 
+                : this.arConfig.port == "http" ? 80 : 80
+    return this.http.get<InfoSchema>(`${this.config.protocol}://${this.config.host}:${port}/info`);
   }
   
+  GetBlock = this.blockService.GetBlock;
+  GetCurrentBlock = this.GetInfo;
+
 }
