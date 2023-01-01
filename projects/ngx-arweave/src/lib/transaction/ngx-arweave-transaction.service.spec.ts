@@ -170,7 +170,7 @@ describe('NgxArweaveTransactionService', () => {
 
   });
 
-  it('GetTransactionStatus should return 503 message from a node that is not joined to the the network', () => {
+  it('GetTransactionOffsetAndSize should return 503 message from a node that is not joined to the the network', () => {
     let expected = {"error": "not_joined"}
 
     httpClientSpy.get.and.returnValues(of(expected))
@@ -184,7 +184,7 @@ describe('NgxArweaveTransactionService', () => {
 
   });
 
-  it('GetTransactionStatus should return 503 message if the request times out', () => {
+  it('GetTransactionOffsetAndSize should return 503 message if the request times out', () => {
     let expected = {"error": "timeout"}
 
     httpClientSpy.get.and.returnValues(of(expected))

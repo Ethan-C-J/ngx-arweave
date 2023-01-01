@@ -1,9 +1,9 @@
-import { TestBed } from '@angular/core/testing';
 import { ArweaveService, ApiConfig } from './ngx-arweave.service';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { NgxArweaveBlockService } from './block/ngx-arweave-block.service';
 import { Observable, of } from 'rxjs';
 import { InfoSchema } from './schemas/InfoSchema';
+import { NgxArweaveTransactionService } from './transaction/ngx-arweave-transaction.service';
 
 describe('ArweaveService', () => {
 
@@ -20,7 +20,8 @@ describe('ArweaveService', () => {
   beforeEach(() => {
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
     let blockService = new NgxArweaveBlockService(httpClientSpy);
-    service = new ArweaveService(httpClientSpy, blockService, config);
+    let txService = new NgxArweaveTransactionService(httpClientSpy);
+    service = new ArweaveService(httpClientSpy, blockService, txService, config);
   });
 
   it('should be created', () => {
@@ -34,59 +35,55 @@ describe('ArweaveService', () => {
 
   it('should contain GetWalletLastTransaction function', () => {
     pending("Not currently implemented");
-    expect(service.hasOwnProperty('GetWalletLastTransaction')).toBeDefined();
+    expect(service.hasOwnProperty('GetWalletLastTransaction')).toBe(true);
   })
 
   it('should contain CreateTransaction function', () => {
     pending("Not currently implemented");
-    expect(service.hasOwnProperty('CreateTransaction')).toBeDefined();
+    expect(service.hasOwnProperty('CreateTransaction')).toBe(true);
   });
 
   it('should contain CreateWalletToWalletTransaction function', () => {
     pending("Not currently implemented");
-    expect(service.hasOwnProperty('CreateWalletToWalletTransaction')).toBeDefined();
+    expect(service.hasOwnProperty('CreateWalletToWalletTransaction')).toBe(true);
   });
 
   it('should contain SignTransaction function', () => {
     pending("Not currently implemented");
-    expect(service.hasOwnProperty('SignTransaction')).toBeDefined();
+    expect(service.hasOwnProperty('SignTransaction')).toBe(true);
   });
 
   it('should contain PostTransaction function', () => {
     pending("Not currently implemented");
-    expect(service.hasOwnProperty('PostTransaction')).toBeDefined();
+    expect(service.hasOwnProperty('PostTransaction')).toBe(true);
   });
 
   it('should contain GetTransactionStatus function', () => {
-    pending("Not currently implemented");
-    expect(service.hasOwnProperty('GetTransactionStatus')).toBeDefined();
+    expect(typeof service.GetTransactionStatus).toBe("function");
   });
 
   it('should contain GetTransaction function', () => {
-    pending("Not currently implemented");
-    expect(service.hasOwnProperty('GetTransaction')).toBeDefined();
+    expect(typeof service.GetTransaction).toBe("function");
   });
   
-  it('should contain GetTransactionData function', () => {
-    pending("Not currently implemented");
-    expect(service.hasOwnProperty('GetTransactionData')).toBeDefined();
+  it('should contain GetTransactionField function', () => {
+    expect(typeof service.GetTransactionField).toBe("function");
   });
 
-  it('should contain GetTransactionStatus function', () => {
-    pending("Not currently implemented");
-    expect(service.hasOwnProperty('GetTransactionStatus')).toBeDefined();
+  it('should contain GetTransactionOffsetAndSize function', () => {
+    expect(typeof service.GetTransactionOffsetAndSize).toBe("function");
   });
 
   it('should contain GetBlock function', () => {
-    expect(service.hasOwnProperty('GetBlock')).toBeDefined();
+    expect(typeof service.GetBlock).toBe("function");
   });
 
   it('should contain GetCurrentBlock function', () => {
-    expect(service.hasOwnProperty('GetCurrentBlock')).toBeDefined();
+    expect(service.hasOwnProperty('GetCurrentBlock')).toBe(true);
   });
 
   it('should contain GetInfo function', () => {
-    expect(service.hasOwnProperty('GetInfo')).toBeDefined();
+    expect(typeof service.GetInfo).toBe("function");
   });
 
   it('GetInfo\'s result should be of type Observable', () => {

@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BlockResponse } from '../schemas/BlockSchema';
 import { Observable } from 'rxjs';
 import { ApiConfig } from '../ngx-arweave.service';
+import { TransactionFieldSchema, TransactionOffsetAndSizeSchema, TransactionSchema, TransactionStatusSchema } from '../schemas/TransactionSchema';
+import { GetPortNumber } from '../utils';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +12,23 @@ export class NgxArweaveTransactionService {
 
   constructor(private http: HttpClient) {}
 
-  public GetTransaction(config: ApiConfig, txid: string): Observable<BlockResponse> {
+  public GetTransaction(config: ApiConfig, txid: string): Observable<TransactionSchema> {
+    let port = GetPortNumber(config.port)
+    return this.http.get<TransactionSchema>(`${config.protocol}://${config.host}:${port}/tx/${txid}`);
+  }
 
-    let port = typeof config.port == "number" 
-              ? config.port 
-              : config.port == "https" 
-                ? 443 
-                : config.port == "http" ? 80 : 80
+  public GetTransactionStatus(config: ApiConfig, txid: string): Observable<TransactionStatusSchema> {
+    let port = GetPortNumber(config.port)
+    return this.http.get<TransactionStatusSchema>(`${config.protocol}://${config.host}:${port}/tx/${txid}/status`);
+  }
 
-    return this.http.get<BlockResponse>(`${config.protocol}://${config.host}:${port}/tx/${txid}`);
+  public GetTransactionOffsetAndSize(config: ApiConfig, txid: string): Observable<TransactionOffsetAndSizeSchema> {
+    let port = GetPortNumber(config.port)
+    return this.http.get<TransactionOffsetAndSizeSchema>(`${config.protocol}://${config.host}:${port}/tx/${txid}/offset`);
+  }
+
+  public GetTransactionField(config: ApiConfig, txid: string, field:string): Observable<string> {
+    let port = GetPortNumber(config.port)
+    return this.http.get<string>(`${config.protocol}://${config.host}:${port}/tx/${txid}/${field}`);
   }
 }
