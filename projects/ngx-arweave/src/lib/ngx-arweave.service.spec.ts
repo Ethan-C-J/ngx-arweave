@@ -1,13 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-
 import { ArweaveService, ApiConfig } from './ngx-arweave.service';
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { NgxArweaveModule } from 'ngx-arweave';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { NgxArweaveBlockService } from './block/ngx-arweave-block.service';
 import { Observable, of } from 'rxjs';
 import { InfoSchema } from './schemas/InfoSchema';
-import { ɵisObservable } from '@angular/core';
 
 describe('ArweaveService', () => {
 
