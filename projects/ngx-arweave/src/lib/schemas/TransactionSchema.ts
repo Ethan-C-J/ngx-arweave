@@ -6,6 +6,8 @@ export interface TransactionSchema {
     tags: Array<string>;
     target: string;
     quantity: string;
+    data: string;
+    data_tree: string[];
     data_root: string;
     data_size: string;
     reward: string;
