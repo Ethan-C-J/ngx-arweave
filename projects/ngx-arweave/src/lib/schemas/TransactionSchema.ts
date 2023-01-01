@@ -1,36 +1,28 @@
 export interface TransactionSchema {
-    status: number;
-    format?: number;
-    id?: string;
-    lastTransaction?: string;
-    owner?: string;
-    tags?: Array<string>;
-    target?: string;
-    quantity?: string;
-    dataRoot?: string;
-    dataSize?: string;
-    reward?: string;
-    signature?: string;
-    error?: string;
+    format: number;
+    id: string;
+    last_tx: string;
+    owner: string;
+    tags: Array<string>;
+    target: string;
+    quantity: string;
+    data_root: string;
+    data_size: string;
+    reward: string;
+    signature: string;
 }
 
 export interface TransactionStatusSchema {
-    status: number;
-    blockHeight?: number;
-    blockHash?: string;
-    confirmations?: number;
-    error?: string;
+    block_height: number;
+    block_indep_hash: string;
+    number_of_confirmations: number;
 }
 
 export interface TransactionFieldSchema {
-    status: number;
-    content?: string
-    error?: string;
+    content: string
 }
 
 export interface TransactionOffsetAndSizeSchema {
-    status: number;
-    offset?: string;
-    size?: string;
-    error?: string;
+    offset: string;
+    size: string;
 }
