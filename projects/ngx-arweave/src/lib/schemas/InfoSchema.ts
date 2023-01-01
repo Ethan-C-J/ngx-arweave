@@ -1,18 +1,16 @@
 export interface InfoSchema {
-    status: number;
     network: string;
     version: number;
     release: number;
     height: number;
-    currentBlock: string;
-    blockCount: number;
-    peerCount: number;
-    queueLength: number;
-    nodeStateLatency: number;
+    current: string;
+    blocks: number;
+    peers: number;
+    queue_length: number;
+    node_state_latency: number;
 }
 
 export interface PeersSchema {
-    status: number;
     peers: Array<string>;
 }
 

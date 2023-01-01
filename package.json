@@ -1,5 +1,5 @@
 {
-  "name": ".",
+  "name": "ngx-arweave",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -15,13 +15,16 @@
     "@angular/animations": "^14.2.0",
     "@angular/common": "^14.2.0",
     "@angular/compiler": "^14.2.0",
-    "@angular/core": "^14.2.0",
+    "@angular/core": "^14.2.12",
     "@angular/forms": "^14.2.0",
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
     "arweave": "^1.11.6",
+    "constants-browserify": "^1.0.0",
+    "crypto-browserify": "^3.12.0",
     "rxjs": "~7.5.0",
+    "stream-browserify": "^3.0.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
